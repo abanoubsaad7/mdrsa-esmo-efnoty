@@ -29,6 +29,11 @@ cloudinary.config({
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
+const streamifier = require("streamifier"); // Add the 'streamifier' package
+const stream = require("stream");
+
+const fs = require("fs");
+
 // mongoose
 const mongoose = require("mongoose");
 
@@ -48,4 +53,8 @@ mongoose
 //start page
 app.get('/', (req, res) => {
   res.render('index')
+})
+
+app.get('/profile', (req, res) => {
+  res.render('profile')
 })

@@ -1,4 +1,5 @@
 body {
+  padding: 0 2%;
   direction: rtl;
   background-color: #EFEFF1;
 }
@@ -15,4 +16,27 @@ body {
   background: rgba(255, 255, 255, 0.732);
   border-radius: 20px;
   border: black 1px solid;
+}
+.userName{
+  margin-right: auto;
+}
+.sideBar{
+  display: flex;
+  flex-direction: column;
+  padding: 0 2% 5%;
+  height: 89vh;
+}
+.pageContent{
+  border-radius: 30px;
+  border: black 1px solid;
+  background-color: rgba(255, 255, 255, 0.293);
+  padding: 2% 10% 5% 5%;
+  margin: auto;
+}
+.userData{
+  margin: 2% 4%;
+  font-size: larger;
+}
+.page{
+  margin: 4% 0 ;
 }

@@ -1,41 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-grid.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-grid.rtl.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-grid.rtl.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-reboot.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-reboot.rtl.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-reboot.rtl.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-utilities.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-utilities.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-utilities.rtl.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap-utilities.rtl.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap.rtl.css">
-  <link rel="stylesheet" href="/bootstrap-5.3.1-dist/css/bootstrap.rtl.min.css">
-  <link rel="stylesheet" href="/style.css">
-  <link rel="stylesheet" href="/print.css">
+<%- include('partials/head') %>
 
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.bundle.js"></script>
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.bundle.min.js"></script>
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.esm.js"></script>
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.esm.min.js"></script>
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.js"></script>
-  <script src="/bootstrap-5.3.1-dist/js/bootstrap.min.js"></script>
-  <script src="https://kit.fontawesome.com/85f85b2693.js" crossorigin="anonymous"></script>
-</head>
-<body>
-  <div>
-    <nav class="sideBar">
-       
-    </nav>
-  </div>
-</body>
+  <body>
+    <%- include('partials/mainNav') %>
+    <div class="row">
+      <%- include('partials/sideBar') %>
+      <div style="display: inline-block;" class="pageContent col-10 row">
+        <div class="col-10">
+          <div class="userData">
+            <img src="/img/WhatsApp Image 2023-11-19 at 22.18.35_1b06af44.jpg" alt="...." style="width: 200px; height: 200px; border-radius: 50%; box-shadow: 3px 3px 5px 1px rgba(56, 55, 55, 0.756);">
+            <label class="userData"> الاسم: ابانوب سعد </label>
+          </div>
+          
+          <label class="userData"> الفصل: الانبا انطونيوس </label>
+          
+          <label class="userData"> السن : 22 سنة </label>
+          <label class="userData"> تاريخ الميلاد : 15/12/2001 </label>
+          
+          <label class="userData"> العنوان : 173 قطاع ل ابني بيتك السادسة 6-اكتوبر </label>
+          <br>
+        </div>
+        <div class="col-10">
+          <label class="userData"> تاريخ الشموسية : 20/2/2012  </label>
+          <label class="userData"> رقم التليفون: 01011855638 </label>
+          <br>
+          <label class="userData"> رقم الواتس: 01011855638 </label>
+          <label class="userData"> أب الاعتراف : ابونا لوكاس </label>
+          
+        </div>
+        
+      </div>
+    </div>
+    
+  </body>
+
 </html>
