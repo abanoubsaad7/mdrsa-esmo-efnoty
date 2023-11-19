@@ -1,0 +1,18 @@
+body {
+  direction: rtl;
+  background-color: #EFEFF1;
+}
+
+.logo {
+  width: 100%;
+  margin-right: 10%;
+}
+.main{
+  padding: 3%;
+}
+.box{
+  padding: 10% 2% 6% 2%;
+  background: rgba(255, 255, 255, 0.732);
+  border-radius: 20px;
+  border: black 1px solid;
+}
