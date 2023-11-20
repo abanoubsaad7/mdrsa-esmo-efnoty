@@ -1,7 +1,32 @@
 body {
+  background-color: #EFEFF1;
   padding: 0 2%;
   direction: rtl;
-  background-color: #EFEFF1;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url('/img/IMG-20231119-WA0032.jpg') center no-repeat;
+  opacity: 0.5; /* Set the opacity to make the photo semi-visible */
+  z-index: -1; /* Place the overlay behind other content */
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #EFEFF1; /* Fallback background color */
+  opacity: 0.5; /* Set the opacity for the fallback background color */
+  z-index: -1; /* Place the fallback background behind other content */
 }
 
 .logo {

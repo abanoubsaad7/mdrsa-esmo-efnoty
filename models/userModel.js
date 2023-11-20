@@ -20,6 +20,7 @@ const userSchema = new Schema ({
     whats:String,
     father:String,
     imgURL:String,
+    role:String
 });
 const User = mongoose.model("User",userSchema);
 
