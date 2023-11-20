@@ -11,31 +11,31 @@
       <center>
         <form action="/waiting/register" method="post" enctype="multipart/form-data" class="register">
           <label>اسمك بالكامل</label>
-          <input type="text" name="name" placeholder="دخل اسمك">
+          <input type="text" name="name" placeholder="دخل اسمك" required>
           <br><br>
           <label>سنك</label>
-          <input type="text" name="age" placeholder="دخل سنك">
+          <input type="text" name="age" placeholder="دخل سنك" required>
           <br><br>
           <label>تاريخ ميلادك</label>
-          <input type="text" name="birthDayDate" placeholder="دخل تاريخ ميلادك بالشكل دا يوم/شهر/سنة">
+          <input type="text" name="birthDayDate" placeholder="دخل تاريخ ميلادك بالشكل دا يوم/شهر/سنة" required>
           <br><br>
           <label>العنوان بالتفصيل</label>
-          <input type="text" name="address" placeholder="عنوانك بالتفصيل">
+          <input type="text" name="address" placeholder="عنوانك بالتفصيل" required>
           <br><br>
           <label>تاريخ الشموسية</label>
           <input type="text" name="shmosyaDate" placeholder="دخل تاريخ رسامتك بالشكل دا يوم/شهر/سنة">
           <br><br>
           <label>رقم الموبايل</label>
-          <input type="text" name="phone" placeholder="رقم الموبايل">
+          <input type="text" name="phone" placeholder="رقم الموبايل" required>
           <br><br>
           <label>رقم الواتساب</label>
-          <input type="text" name="whats" placeholder="رقم الواتساب">
+          <input type="text" name="whats" placeholder="رقم الواتساب" required>
           <br><br>
           <label>اب الاعتراف</label>
-          <input type="text" name="father" placeholder="اب الاعتراف">
+          <input type="text" name="father" placeholder="اب الاعتراف" required>
           <br><br>
           <label>فصلك</label>
-          <select name="className" placeholder="اختار فصلك من هنا">
+          <select name="className" placeholder="اختار فصلك من هنا" required>
             <option selected disabled>--اختار فصلك من هنا--</option>
             <option value=" السمائيين "> السمائيين </option>
             <option value=" ني انجيلوس "> ني انجيلوس </option>
@@ -53,7 +53,7 @@
           </select>
           <br><br>
           <label>رفع صورتك الشخصية</label>
-          <input type="file" name="profileImg">
+          <input type="file" name="profileImg" required>
           <br>
           <p>ملحوظة: لن يتم تغيير صورتك الشخصية لذلك عليك وضع صورة شخصية واضحة</p>
           <br>

@@ -9,31 +9,31 @@
       <div style="display: inline-block;" class="pageContent col-10 row">
         <form action="/admin/add-user" method="post"  class="register">
           <label>اسمك بالكامل</label>
-          <input type="text" name="name" placeholder="دخل اسمك" value="<%= objWaiting.name %>">
+          <input type="text" name="name" placeholder="دخل اسمك" value="<%= objWaiting.name %>" required>
           <br><br>
           <label>سنك</label>
-          <input type="text" name="age" placeholder="دخل سنك" value="<%= objWaiting.age %>">
+          <input type="text" name="age" placeholder="دخل سنك" value="<%= objWaiting.age %>" required>
           <br><br>
           <label>تاريخ ميلادك</label>
-          <input type="text" name="birthDayDate" placeholder="دخل تاريخ ميلادك بالشكل دا يوم/شهر/سنة" value="<%= objWaiting.birthDayDate %>">
+          <input type="text" name="birthDayDate" placeholder="دخل تاريخ ميلادك بالشكل دا يوم/شهر/سنة" value="<%= objWaiting.birthDayDate %>" required>
           <br><br>
           <label>العنوان بالتفصيل</label>
-          <input type="text" name="address" placeholder="عنوانك بالتفصيل" value="<%= objWaiting.address %>">
+          <input type="text" name="address" placeholder="عنوانك بالتفصيل" value="<%= objWaiting.address %>" required>
           <br><br>
           <label>تاريخ الشموسية</label>
           <input type="text" name="shmosyaDate" placeholder="دخل تاريخ رسامتك بالشكل دا يوم/شهر/سنة" value="<%= objWaiting.shmosyaDate %>">
           <br><br>
           <label>رقم الموبايل</label>
-          <input type="text" name="phone" placeholder="رقم الموبايل" value="<%= objWaiting.phone %>">
+          <input type="text" name="phone" placeholder="رقم الموبايل" value="<%= objWaiting.phone %>" required>
           <br><br>
           <label>رقم الواتساب</label>
-          <input type="text" name="whats" placeholder="رقم الواتساب" value="<%= objWaiting.whats %>">
+          <input type="text" name="whats" placeholder="رقم الواتساب" value="<%= objWaiting.whats %>" required>
           <br><br>
           <label>اب الاعتراف</label>
-          <input type="text" name="father" placeholder="اب الاعتراف" value="<%= objWaiting.father %>">
+          <input type="text" name="father" placeholder="اب الاعتراف" value="<%= objWaiting.father %>" required>
           <br><br>
           <label>فصلك</label>
-          <select name="className" placeholder="اختار فصلك من هنا">
+          <select name="className" placeholder="اختار فصلك من هنا" required>
             <option value="<%= objWaiting.className %>" selected><%= objWaiting.className %></option>
             <option disabled>--اختار فصلك من هنا--</option>
             <option value=" السمائيين "> السمائيين </option>
@@ -52,7 +52,7 @@
           </select>
           <br><br>
           <label> دور المستخدم </label>
-          <select name="role">
+          <select name="role" required>
             <option selected disabled> -- اختار دور المستخدم -- </option>
             <option value="خادم">خادم</option>
             <option value="مخدوم">مخدوم</option>
@@ -60,10 +60,10 @@
           <br>
           <br>
           <label>username</label>
-          <input type="text" name="username">
+          <input type="text" name="username" required>
           <br><br>
           <label>code</label>
-          <input type="password" name="code">
+          <input type="text" name="code" required>
           <br><br>
           <input type="submit" value=" اضافة المستخدم ">
         </form>
