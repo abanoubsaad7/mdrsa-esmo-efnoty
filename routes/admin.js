@@ -49,7 +49,7 @@ router.post('/add-user', function (req, res) {
     })
     newUser.save().then((result)=>{
       Waiting.deleteOne(waitingResult).then((deletedWaiting)=>{
-        res.redirect('/waiting')
+        res.redirect('/admin/waiting')
       })
       
     })
