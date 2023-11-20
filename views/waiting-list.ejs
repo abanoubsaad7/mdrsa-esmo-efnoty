@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+  <body>
+    <%- include('partials/mainNav') %>
+      <div class="row">
+        <%- include('partials/sideBar') %>
+          <div style="display: inline-block;" class="pageContent col-10 row">
+            <div class="col-10 row">
+              <table>
+                <tr>
+                  <th class="userName">
+                    الاسم
+                  </th>
+                  <th class="userName">
+                    عرض البيانات لمراجعاتها
+                  </th>
+                </tr>
+                <% waitingList.forEach(currentItem=> { %>
+                  <tr>
+                    <td class="userName">
+                      <%= currentItem.name %>
+                    </td>
+                    <td class="userName"><a href="admin/add-user/<%= currentItem._id %>" class="btn btn-lg btn-primary"><i class="fa fa-eye"></i> عرض البيانات </a></td>
+                  </tr>
+                  <% }); %>
+              </table>
+            </div>
+
+          </div>
+      </div>
+
+  </body>
+
+</html>

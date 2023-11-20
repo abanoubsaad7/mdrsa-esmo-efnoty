@@ -6,14 +6,6 @@ const waitingSchema = new Schema ({
     className:String,
     age:String,
     birthDayDate:String,
-    username:{
-      type: String,
-      unique: true
-    },
-    code:{
-      type:String,
-      unique : true
-    },
     address:String,
     shmosyaDate:String,
     phone:String,

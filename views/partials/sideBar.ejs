@@ -1,19 +1,55 @@
 <nav class="sideBar col-2">
   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
     <li class="nav-item">
-      <a href="#" class="nav-link page"> الصفحة الشخصية </a>
+      <a href="/profile" class="nav-link page"> الصفحة الشخصية </a>
     </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link page"> الحصص </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link page"> الحضور والغياب </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link page"> اخبار المدرسة </a>
-    </li>
-    <li class="nav-item">
-      <a href="#" class="nav-link page"> عن المدرسة</a>
-    </li>
+    <% if(loggedUser.role==="مخدوم" ) { %>
+      <li class="nav-item">
+        <a href="#" class="nav-link page"> الحصص </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link page"> الحضور والغياب </a>
+      </li>
+      <% } else if(loggedUser.role==="خادم" ) { %>
+        <li class="nav-item">
+          <a href="/admin/waiting" class="nav-link page"> قائمة الانتظار </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link page"> ادارة الحصص </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link page"> ادارة الحضور والغياب </a>
+        </li>
+        <% } %>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link page"> اخبار المدرسة </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link page"> عن المدرسة</a>
+          </li>
   </ul>
 </nav>
+<!-- Add this script at the end of your EJS file or in a separate script file -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get the current URL path
+    var path = window.location.pathname;
+  
+    // Select all elements with the class 'page'
+    var pageElements = document.querySelectorAll('.page');
+  
+    // Loop through each 'page' element
+    pageElements.forEach(function (element) {
+      // Get the href attribute of the link inside the 'page' element
+      var linkHref = element.getAttribute('href');
+  
+      // Check if the current path matches the link's href
+      if (path === linkHref) {
+        // Add the 'activePage' class to the current page
+        element.classList.add('activePage');
+      }
+    });
+  });
+  </script>
+  

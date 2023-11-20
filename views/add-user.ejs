@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+  <body>
+    <%- include('partials/mainNav') %>
+    <div class="row">
+      <%- include('partials/sideBar') %>
+      <div style="display: inline-block;" class="pageContent col-10 row">
+        <form action="/admin/add-user" method="post"  class="register">
+          <label>اسمك بالكامل</label>
+          <input type="text" name="name" placeholder="دخل اسمك" value="<%= objWaiting.name %>">
+          <br><br>
+          <label>سنك</label>
+          <input type="text" name="age" placeholder="دخل سنك" value="<%= objWaiting.age %>">
+          <br><br>
+          <label>تاريخ ميلادك</label>
+          <input type="text" name="birthDayDate" placeholder="دخل تاريخ ميلادك بالشكل دا يوم/شهر/سنة" value="<%= objWaiting.birthDayDate %>">
+          <br><br>
+          <label>العنوان بالتفصيل</label>
+          <input type="text" name="address" placeholder="عنوانك بالتفصيل" value="<%= objWaiting.address %>">
+          <br><br>
+          <label>تاريخ الشموسية</label>
+          <input type="text" name="shmosyaDate" placeholder="دخل تاريخ رسامتك بالشكل دا يوم/شهر/سنة" value="<%= objWaiting.shmosyaDate %>">
+          <br><br>
+          <label>رقم الموبايل</label>
+          <input type="text" name="phone" placeholder="رقم الموبايل" value="<%= objWaiting.phone %>">
+          <br><br>
+          <label>رقم الواتساب</label>
+          <input type="text" name="whats" placeholder="رقم الواتساب" value="<%= objWaiting.whats %>">
+          <br><br>
+          <label>اب الاعتراف</label>
+          <input type="text" name="father" placeholder="اب الاعتراف" value="<%= objWaiting.father %>">
+          <br><br>
+          <label>فصلك</label>
+          <select name="className" placeholder="اختار فصلك من هنا">
+            <option value="<%= objWaiting.className %>" selected><%= objWaiting.className %></option>
+            <option disabled>--اختار فصلك من هنا--</option>
+            <option value=" السمائيين "> السمائيين </option>
+            <option value=" ني انجيلوس "> ني انجيلوس </option>
+            <option value=" العذراء مريم والملاك ميخائيل"> العذراء مريم والملاك ميخائيل </option>
+            <option value=" رؤساء الملائكة "> رؤساء الملائكة </option>
+            <option value=" القديسة دميانة و الاربعين عذراء "> القديسة دميانة و الاربعين عذراء </option>
+            <option value=" الشاروبيم والسيرافيم "> الشاروبيم والسيرافيم </option>
+            <option value=" القديسة اناسيمون والقديسة مريم المصرية "> القديسة اناسيمون والقديسة مريم المصرية </option>
+            <option value=" مارجرجس "> مارجرجس </option>
+            <option value=" الانبا انطونيوس "> الانبا انطونيوس </option>
+            <option value=" قانا الجليل "> قانا الجليل </option>
+            <option value=" الشهيد اسطفانوس "> الشهيد اسطفانوس </option>
+            <option value=" الطغمات السمائية "> الطغمات السمائية </option>
+            <option value=" القديسين بطرس وبولس الرسولان "> القديسين بطرس وبولس الرسولان </option>
+          </select>
+          <br><br>
+          <label> دور المستخدم </label>
+          <select name="role">
+            <option selected disabled> -- اختار دور المستخدم -- </option>
+            <option value="خادم">خادم</option>
+            <option value="مخدوم">مخدوم</option>
+          </select>
+          <br>
+          <br>
+          <label>username</label>
+          <input type="text" name="username">
+          <br><br>
+          <label>code</label>
+          <input type="password" name="code">
+          <br><br>
+          <input type="submit" value=" اضافة المستخدم ">
+        </form>
+      </div>
+    </div>
+    
+  </body>
+
+</html>

@@ -9,24 +9,24 @@
       <div style="display: inline-block;" class="pageContent col-10 row">
         <div class="col-10">
           <div class="userData">
-            <img src="/img/WhatsApp Image 2023-11-19 at 22.18.35_1b06af44.jpg" alt="...." style="width: 200px; height: 200px; border-radius: 50%; box-shadow: 3px 3px 5px 1px rgba(56, 55, 55, 0.756);">
-            <label class="userData"> الاسم: ابانوب سعد </label>
+            <img src="<%= loggedUser.imgURL %>" alt="...." style="width: 200px; height: 200px; border-radius: 50%; box-shadow: 3px 3px 5px 1px rgba(56, 55, 55, 0.756);">
+            <label class="userData"> الاسم: <%= loggedUser.name %> </label>
           </div>
           
-          <label class="userData"> الفصل: الانبا انطونيوس </label>
+          <label class="userData"> الفصل:  <%= loggedUser.className %> </label>
           
-          <label class="userData"> السن : 22 سنة </label>
-          <label class="userData"> تاريخ الميلاد : 15/12/2001 </label>
+          <label class="userData"> السن : <%= loggedUser.age %> سنة </label>
+          <label class="userData"> تاريخ الميلاد : <%= loggedUser.birthDayDate %> </label>
           
-          <label class="userData"> العنوان : 173 قطاع ل ابني بيتك السادسة 6-اكتوبر </label>
+          <label class="userData"> العنوان : <%= loggedUser.address %></label>
           <br>
         </div>
         <div class="col-10">
-          <label class="userData"> تاريخ الشموسية : 20/2/2012  </label>
-          <label class="userData"> رقم التليفون: 01011855638 </label>
+          <label class="userData"> تاريخ الشموسية : <%= loggedUser.shmosyaDate %>  </label>
+          <label class="userData"> رقم التليفون: <%= loggedUser.phone %> </label>
           <br>
-          <label class="userData"> رقم الواتس: 01011855638 </label>
-          <label class="userData"> أب الاعتراف : ابونا لوكاس </label>
+          <label class="userData"> رقم الواتس: <%= loggedUser.whats %> </label>
+          <label class="userData"> أب الاعتراف : <%= loggedUser.father %>  </label>
           
         </div>
         

@@ -50,11 +50,119 @@ mongoose
     console.error("MongoDB connection error!", err);
   });
 
+
+
+//middleare for auth
+//session set up
+const session = require("express-session");
+
+//token
+const jwt = require("jsonwebtoken");
+
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+// Generate JWT token
+const generateToken = (user) => {
+  const secretKey = "marigerges-e3dadi-taio"; // Replace with your own secret key
+  const payload = {
+    userId: user._id,
+    username: user.username,
+    // Include any additional data you want in the token payload
+  };
+  const options = {
+    expiresIn: "1h", // Token expiration time
+  };
+
+  return jwt.sign(payload, secretKey, options);
+};
+
+const verifyToken = (req, res, next) => {
+  const token = req.headers.authorization || req.session.token;
+
+  if (!token) {
+    return res.redirect("/login");
+  }
+
+  // Verify the token here
+  const secretKey = "marigerges-e3dadi-taio"; // Replace with your own secret key
+
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(401).send("Invalid token");
+    }
+
+    const userId = decoded.userId;
+
+    User.findById(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(401).send("Invalid token after decoded");
+        }
+
+        req.user = user;
+        const loggedUser = req.user
+        res.locals.loggedUser = loggedUser;
+        next();
+      })
+      .catch((err) => {
+        console.error("Error verifying token:", err);
+        res.status(500).send("An error occurred while verifying the token");
+      });
+  });
+};
+
+const isAdmin= (req, res, next)=>{
+  if(foundedUser.role === 'خادم'){
+    next()
+  }else{
+    res.send('you are not authorized')
+  }
+}
+
+//models
+const User = require("./models/userModel");
+
 //start page
 app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.get('/profile', (req, res) => {
+app.get('/login', (req, res) => {
+  res.redirect('/')
+})
+
+app.post('/login', function (req, res) {
+  let {username , code } =req.body;
+  User.findOne({
+    username : username,
+    code : code
+  }).then((result)=>{
+    if(result.username === username && result.code === code){
+      const token = generateToken(result);
+        req.headers.authorization = token;
+        req.session.token = token;
+        res.redirect('/profile')
+    }else{
+      res.redirect('/')
+    }
+  })
+})
+
+app.get('/profile', verifyToken , (req, res) => {
   res.render('profile')
 })
+
+//routes
+const waitingRoutes = require('./routes/waiting')
+const adminRoutes = require('./routes/admin');
+
+
+
+app.use('/waiting',waitingRoutes)
+app.use('/admin', verifyToken ,adminRoutes)

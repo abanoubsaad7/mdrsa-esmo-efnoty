@@ -7,8 +7,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="userName">
-        <img src="/img/WhatsApp Image 2023-11-19 at 22.18.35_1b06af44.jpg" alt="..." style="width: 50px; height: 50px; border-radius: 50%; box-shadow: 3px 3px 5px 1px rgba(56, 55, 55, 0.756);">
-        <h5 style="display: inline;"> Abanoub Saad </h5>
+        <img src="<%= loggedUser.imgURL %>" alt="..." style="width: 50px; height: 50px; border-radius: 50%; box-shadow: 3px 3px 5px 1px rgba(56, 55, 55, 0.756);">
+        <h5 style="display: inline-block;"> <%= loggedUser.username %> </h5>
+        <p style="text-align: center; margin-top: -22px;"><%= loggedUser.role %></p>
       </div>
     </div>
   </div>
