@@ -59,7 +59,7 @@ body::after {
   display: flex;
   flex-direction: column;
   padding: 0 2% 5%;
-  height: 89vh;
+
 }
 .pageContent{
   border-radius: 30px;
@@ -73,7 +73,7 @@ body::after {
   font-size: larger;
 }
 .page{
-  margin: 4% 0 ;
+  margin: 4% 1% ;
 }
 .page:hover{
   color: #871D1D;
@@ -83,4 +83,20 @@ body::after {
   border-bottom: 2px solid #871D1D;
   color: #871D1D;
   font-weight: bold;
+}
+@media (max-width:1000px) {
+  .sideBar{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .navbar-nav {
+    display: flex;
+    flex-direction: row; /* Align items horizontally */
+    list-style: none; /* Remove default list styling */
+    padding: 0; /* Remove default padding */
+  }
+  .pageInPhone{
+    display: inline;
+  }
 }
