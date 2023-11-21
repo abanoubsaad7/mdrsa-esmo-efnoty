@@ -17,14 +17,23 @@
                     عرض البيانات لمراجعاتها
                   </th>
                 </tr>
-                <% waitingList.forEach(currentItem=> { %>
-                  <tr>
-                    <td class="userName">
-                      <%= currentItem.name %>
-                    </td>
-                    <td class="userName"><a href="/admin/add-user/<%= currentItem._id %>" class="btn btn-lg btn-primary"><i class="fa fa-eye"></i> عرض البيانات </a></td>
-                  </tr>
-                  <% }); %>
+                <% if(waitingList){ %>
+                  <% waitingList.forEach(currentItem=> { %>
+                    <tr>
+                      <td class="userName">
+                        <%= currentItem.name %>
+                      </td>
+                      <td class="userName"><a href="/admin/add-user/<%= currentItem._id %>"
+                          class="btn btn-lg btn-primary"><i class="fa fa-eye"></i> عرض البيانات </a></td>
+                    </tr>
+                    <% }); %>
+                      <% }else{ %>
+                        <tr>
+                          <td>
+                            <h3>لا يوجد طلبات انضمام</h3>
+                          </td>
+                        </tr>
+                        <% } %>
               </table>
             </div>
 
