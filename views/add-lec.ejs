@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('partials/head') %>
+
+  <body>
+    <%- include('partials/mainNav') %>
+      <div class="row">
+        <%- include('partials/sideBar') %>
+          <div style="display: inline-block;" class="pageContent col-lg-10 row">
+            <form action="/admin/add-lec" method="post" enctype="multipart/form-data" style="margin: 2%;">
+              <label>اسم الحصة</label>
+              <input type="text" name="name" placeholder="اسم الحصة" style="margin: 2%;" required>
+              <label>تاريخها</label>
+              <input type="date" name="date" placeholder="client Phone" style="margin: 2%;" required>
+              <button type="submit" class="btn btn-lg btn-success"><i class="fa-solid fa-check"></i> save</button>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col"> نوع المحتوى</th>
+                    <th scope="col"> المحتوى</th>
+                    <th scope="col">مسح</th>
+                  </tr>
+                </thead>
+                <tbody id="item-table-body">
+                </tbody>
+              </table>
+              <label>صور محتويات الحصة:</label>
+              <input type="file" name="contentImgs" multiple>
+              <label> تسجيل اللحن </label>
+              <input type="file" name="contentAudio" multiple>
+            </form>
+            <button id="add-item-button" onclick="addItem()" class="btn btn-lg btn-info">
+              <i class="fa-solid fa-plus"></i>
+              اضافة محتوى
+            </button>
+
+            <script>
+              const itemTableBody = document.getElementById('item-table-body');
+              let rowCounter = 1;
+              let priceInputs = document.querySelectorAll('.price-input');
+
+              const addItem = () => {
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+            <tr>
+              <td>
+                <select name="contentsTypes" class="item-select">
+                  <option value="" selected disabled hidden>اختر نوع المحتوى</option>
+                  <option value="الحان">الحان</option>
+                  <option value="طقس">طقس</option>
+                  <option value="قبطي">قبطي</option>
+                </select>
+              </td>
+              <td>
+                <input type="text" name="contentsNames" class="price-input"  required placeholder="اسم محتوى الحصة">
+              </td>
+              <td>
+                <button class='btn btn-lg btn-danger' onclick="deleteRow(this)">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </td>
+            </tr>
+          `; const selectElement = newRow.querySelector('.item-select');
+                selectElement.addEventListener('change', function () {
+                  const selectedValue = this.value;
+                  if (selectedValue === 'الحان') {
+                    appendNewSelect(newRow);
+                  }
+                });
+
+                itemTableBody.appendChild(newRow);
+              };
+
+              const appendNewSelect = (row) => {
+                const newSelect = document.createElement('select');
+                newSelect.name = 'al7anTypes';
+                // Add options to the new select as needed
+                newSelect.innerHTML = `
+                  <option value="" selected disabled hidden>اختر نوع اللحن</option>
+                  <option value="سنوي">سنوي</option>
+                  <option value="فرايحي">فرايحي</option>
+                  <option value="حزايني">حزايني</option>
+                  <option value="كيهكي">كيهكي</option>
+                  <option value="شعانيني">شعانيني</option>
+                  <option value="صيامي-ايام">صيامي-ايام</option>
+                  <option value="صيامي-سبوت واحاد">صيامي-سبوت واحاد</option>
+                `;
+                const cell = row.querySelector('td');
+                cell.appendChild(newSelect);
+              };
+
+              const deleteRow = (deleteButton) => {
+                const row = deleteButton.closest('tr');
+                row.remove();
+              };
+            </script>
+          </div>
+      </div>
+  </body>
+
+</html>
