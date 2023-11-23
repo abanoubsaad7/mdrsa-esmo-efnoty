@@ -108,6 +108,7 @@ const verifyToken = (req, res, next) => {
         req.user = user;
         const loggedUser = req.user
         res.locals.loggedUser = loggedUser;
+        req.session.loggedUser = loggedUser;
         next();
       })
       .catch((err) => {
@@ -161,8 +162,10 @@ app.get('/profile', verifyToken , (req, res) => {
 //routes
 const waitingRoutes = require('./routes/waiting')
 const adminRoutes = require('./routes/admin');
+const userRoutes = require('./routes/user');
 
 
 
 app.use('/waiting',waitingRoutes)
 app.use('/admin', verifyToken ,adminRoutes)
+app.use('/user', verifyToken ,userRoutes)

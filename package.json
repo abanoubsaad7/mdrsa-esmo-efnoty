@@ -14,6 +14,26 @@
   },
   "engines": {
     "node": ">=15.0.0"
-  }
-  
+  },
+  "name": "mdrsa-esmo-efnoty",
+  "version": "1.0.0",
+  "description": "christian Deaconess school website",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abanoubsaad7/mdrsa-esmo-efnoty.git"
+  },
+  "keywords": [
+    "esmo-efnoty"
+  ],
+  "author": "Abanoub_Saad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abanoubsaad7/mdrsa-esmo-efnoty/issues"
+  },
+  "homepage": "https://github.com/abanoubsaad7/mdrsa-esmo-efnoty#readme"
 }

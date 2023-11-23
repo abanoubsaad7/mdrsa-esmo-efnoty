@@ -1,6 +1,17 @@
 const express = require("express");
 const router = express.Router();
 
+//session set up
+const session = require("express-session");
+
+router.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
 //upload set up
 const multer = require("multer");
 const bodyParser = require("body-parser");
@@ -106,68 +117,97 @@ router.post(
     { name: "contentAudio", maxCount: 3 },
   ]),
   async (req, res) => {
-    try{
+    try {
       const { name, date } = req.body;
-    let { contentsTypes , contentsNames , al7anTypes  } = req.body
-    let content = [];
-    // Convert contentsTypes , contentsNames and al7anTypes to arrays if they are not already
-    if (!Array.isArray(contentsTypes)) {
-      contentsTypes = [contentsTypes];
-    }
-    if (!Array.isArray(contentsNames)) {
-      contentsNames = [contentsNames];
-    }
-    if (!Array.isArray(al7anTypes)) {
-      al7anTypes = [al7anTypes];
-    }
+      let { contentsTypes, contentsNames, al7anTypes } = req.body;
+      let content = [];
+      // Convert contentsTypes , contentsNames and al7anTypes to arrays if they are not already
+      if (!Array.isArray(contentsTypes)) {
+        contentsTypes = [contentsTypes];
+      }
+      if (!Array.isArray(contentsNames)) {
+        contentsNames = [contentsNames];
+      }
+      if (!Array.isArray(al7anTypes)) {
+        al7anTypes = [al7anTypes];
+      }
 
-    // Upload content images
-    const contentImgsURL = await Promise.all(
-      req.files["contentImgs"].map(async (file) => {
-        if (file.mimetype.startsWith("image")) {
-          return await handleImageUpload(file.buffer);
-        } else {
-          throw new Error("Unsupported file type for content image");
-        }
-      })
-    );
+      // Upload content images
+      const contentImgsURL = await Promise.all(
+        req.files["contentImgs"].map(async (file) => {
+          if (file.mimetype.startsWith("image")) {
+            return await handleImageUpload(file.buffer);
+          } else {
+            throw new Error("Unsupported file type for content image");
+          }
+        })
+      );
 
-    // Upload content audio
-    const contentAudioURL = await Promise.all(
-      req.files["contentAudio"].map(async (file) => {
-        if (file.mimetype.startsWith("audio")) {
-          return await handleAudioUpload(file.buffer);
-        } else {
-          throw new Error("Unsupported file type for content audio");
-        }
-      })
-    );
+      // Upload content audio
+      const contentAudioURL = await Promise.all(
+        req.files["contentAudio"].map(async (file) => {
+          if (file.mimetype.startsWith("audio")) {
+            return await handleAudioUpload(file.buffer);
+          } else {
+            throw new Error("Unsupported file type for content audio");
+          }
+        })
+      );
 
-    for (let i = 0; i < contentsNames.length; i++) {
-      let contentName = contentsNames[i];
-      let contentType = contentsTypes[i];
+      for (let i = 0; i < contentsNames.length; i++) {
+        let contentName = contentsNames[i];
+        let contentType = contentsTypes[i];
         let al7anType = al7anTypes[i];
         content.push({
           contentName: contentName,
           contentType: contentType,
-          al7anType: al7anType, 
+          al7anType: al7anType,
         });
-    }
-    const newLecture = new Lecture ({
-      name:name,
-      content:content,
-      date:date,
-      contentImgsURL:contentImgsURL,
-      contentAudioURL:contentAudioURL,
-    })
-    await console.log('newLecture',newLecture);
-    }catch (error) {
+      }
+      const newLecture = new Lecture({
+        name: name,
+        content: content,
+        date: date,
+        contentImgsURL: contentImgsURL,
+        contentAudioURL: contentAudioURL,
+      });
+      console.log("newLecture", newLecture);
+
+      // Save the new lecture to get its ID
+      const savedLecture = await newLecture.save();
+      console.log("newLecture", savedLecture);
+
+      const loggedUser = req.session.loggedUser;
+
+      const students = await User.find({ className: loggedUser.className });
+      console.log("students", students);
+
+      let studentsLec = [];
+
+      for (j = 0; j < students.length; j++) {
+        let student = students[j];
+        let studentId = student._id;
+
+        const newStudentLec = studentsLec.push({
+          studentID: studentId,
+          lecID: newLecture._id,
+        });
+
+        console.log("newStudentLec :>> ", newStudentLec);
+      }
+
+      console.log("studentsLec :>> ", studentsLec);
+
+      // Save the array of studentLec objects to the studentLecModel
+      const savedStudentLecArray = await studentLec.create(studentsLec);
+      console.log("savedStudentLecArray", savedStudentLecArray);
+      res.redirect('/admin/add-lec')
+    } catch (error) {
       console.error("Error:>>", error);
       res
         .status(500)
         .json({ error: "An error occurred while uploading the media" });
     }
-    
   }
 );
 
@@ -176,14 +216,16 @@ async function handleImageUpload(buffer) {
   const bufferStream = new stream.PassThrough();
   bufferStream.end(buffer);
 
-const temporaryFilePath = `./temp/${Date.now()}_image`;
+  const temporaryFilePath = `./temp/${Date.now()}_image`;
 
   try {
     // Create the temporary file
     await fs.promises.writeFile(temporaryFilePath, buffer);
 
     // Upload the file to Cloudinary using the local file path
-    const result = await cloudinary.uploader.upload(temporaryFilePath, { folder: 'mdrsa-esmo-efnoty-lecture-content-images' });
+    const result = await cloudinary.uploader.upload(temporaryFilePath, {
+      folder: "mdrsa-esmo-efnoty-lecture-content-images",
+    });
 
     // Check if the file exists before attempting to unlink it
     await fs.promises.access(temporaryFilePath, fs.constants.F_OK);
@@ -193,7 +235,7 @@ const temporaryFilePath = `./temp/${Date.now()}_image`;
 
     return result.secure_url;
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
 
     // Handle any errors, such as unlinking the file if an error occurs during upload
     try {
@@ -203,15 +245,14 @@ const temporaryFilePath = `./temp/${Date.now()}_image`;
       // Remove the temporary file after upload
       await fs.promises.unlink(temporaryFilePath);
     } catch (unlinkError) {
-      console.error('Error while unlinking:', unlinkError.message);
+      console.error("Error while unlinking:", unlinkError.message);
     }
 
     throw error; // Re-throw the original error after handling
   }
 }
 
-
-const { Readable } = require('stream');
+const { Readable } = require("stream");
 
 // Function to handle audio upload
 async function handleAudioUpload(buffer) {
@@ -226,9 +267,9 @@ async function handleAudioUpload(buffer) {
     await fs.promises.writeFile(temporaryFilePath, buffer);
 
     // Upload the file to Cloudinary using the local file path
-    const result = await cloudinary.uploader.upload(temporaryFilePath, { 
-      folder: 'mdrsa-esmo-efnoty-lecture-content-audio',
-      resource_type: 'video', // Explicitly set resource type for audio files
+    const result = await cloudinary.uploader.upload(temporaryFilePath, {
+      folder: "mdrsa-esmo-efnoty-lecture-content-audio",
+      resource_type: "video", // Explicitly set resource type for audio files
     });
 
     // Check if the file exists before attempting to unlink it
@@ -239,7 +280,7 @@ async function handleAudioUpload(buffer) {
 
     return result.secure_url;
   } catch (error) {
-    console.error('Error:', error.message);
+    console.error("Error:", error.message);
 
     // Handle any errors, such as unlinking the file if an error occurs during upload
     try {
@@ -249,15 +290,11 @@ async function handleAudioUpload(buffer) {
       // Remove the temporary file after upload
       await fs.promises.unlink(temporaryFilePath);
     } catch (unlinkError) {
-      console.error('Error while unlinking:', unlinkError.message);
+      console.error("Error while unlinking:", unlinkError.message);
     }
 
     throw error; // Re-throw the original error after handling
   }
 }
-
-
-
-
 
 module.exports = router;
