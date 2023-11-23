@@ -155,6 +155,14 @@ app.post('/login', function (req, res) {
   })
 })
 
+app.post('/logOut',verifyToken, function (req, res) {
+  // Delete the token from the session
+  delete req.session.token;
+
+  // Send a response indicating successful logout
+  res.redirect('/');
+});
+
 app.get('/profile', verifyToken , (req, res) => {
   res.render('profile')
 })
